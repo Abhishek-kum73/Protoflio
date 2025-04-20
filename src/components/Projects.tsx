@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { Github } from 'lucide-react';
 
 const Projects: React.FC = () => {
   const projects = [
@@ -7,25 +7,29 @@ const Projects: React.FC = () => {
       title: "Web Penetration Testing Framework",
       description: "A custom Python-based framework for automated web application vulnerability scanning, with modules for XSS, SQL injection, and CSRF testing.",
       technologies: ["Python", "BeautifulSoup", "Requests", "SQLite"],
-      status: "In Progress"
+      status: "In Progress",
+      githubUrl: "https://github.com/Abhishek-kum73/web-pentest-framework"
     },
     {
       title: "Network Security Scanner",
       description: "A Bash tool that combines multiple scanning techniques to provide comprehensive network analysis and vulnerability reporting.",
       technologies: ["Bash", "Nmap", "Wireshark", "Linux"],
-      status: "Completed"
+      status: "Completed",
+      githubUrl: "https://github.com/Abhishek-kum73/network-security-scanner"
     },
     {
       title: "CTF Challenge Platform",
       description: "A self-hosted platform for creating and solving Capture The Flag challenges, with authentication, scoring, and hints system.",
       technologies: ["JavaScript", "Node.js", "Docker", "MongoDB"],
-      status: "Completed"
+      status: "Completed",
+      githubUrl: "https://github.com/Abhishek-kum73/ctf-platform"
     },
     {
       title: "IoT Security Testing Lab",
       description: "A virtual environment for testing IoT device security, including firmware analysis tools and network simulation capabilities.",
       technologies: ["Virtual Machines", "Python", "C", "Firmware Analysis"],
-      status: "In Progress"
+      status: "In Progress",
+      githubUrl: "https://github.com/Abhishek-kum73/iot-security-lab"
     }
   ];
 
@@ -39,9 +43,19 @@ const Projects: React.FC = () => {
             <div key={index} className="glow-card h-full">
               <div className="flex justify-between items-start mb-3">
                 <h3 className="text-xl text-terminal-cyan font-semibold">{project.title}</h3>
-                <span className={`text-xs px-2 py-1 rounded ${project.status === 'Completed' ? 'bg-green-900/50 text-green-400' : 'bg-yellow-900/50 text-yellow-400'}`}>
-                  {project.status}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className={`text-xs px-2 py-1 rounded ${project.status === 'Completed' ? 'bg-green-900/50 text-green-400' : 'bg-yellow-900/50 text-yellow-400'}`}>
+                    {project.status}
+                  </span>
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-terminal-green hover:text-terminal-amber transition-colors"
+                  >
+                    <Github size={20} />
+                  </a>
+                </div>
               </div>
               
               <p className="mb-4 text-sm text-gray-300">{project.description}</p>

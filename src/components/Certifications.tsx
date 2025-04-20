@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { ExternalLink } from 'lucide-react';
 
 const Certifications: React.FC = () => {
   const certifications = [
@@ -7,19 +7,22 @@ const Certifications: React.FC = () => {
       title: "Certified Ethical Hacker (CEH)",
       issuer: "EC-Council",
       date: "In Progress",
-      logo: "🛡️"
+      logo: "🛡️",
+      url: "https://www.eccouncil.org/certified-ethical-hacker/"
     },
     {
       title: "CompTIA Security+",
       issuer: "CompTIA",
       date: "In Progress",
-      logo: "🔒"
+      logo: "🔒",
+      url: "https://www.comptia.org/certifications/security"
     },
     {
       title: "TryHackMe SOC Level 1 Path",
       issuer: "TryHackMe",
       date: "December 2024",
-      logo: "🔍"
+      logo: "🔍",
+      url: "https://tryhackme.com/path/outline/soc1"
     }
   ];
 
@@ -28,25 +31,29 @@ const Certifications: React.FC = () => {
       title: "Web Fundamentals",
       platform: "TryHackMe",
       level: "Advanced",
-      progress: 100
+      progress: 100,
+      url: "https://tryhackme.com/path/outline/web"
     },
     {
       title: "Network Security",
       platform: "HackTheBox",
       level: "Intermediate",
-      progress: 80
+      progress: 80,
+      url: "https://app.hackthebox.com/learning-paths/network-security"
     },
     {
       title: "OSINT Specialist",
       platform: "TryHackMe",
       level: "Intermediate",
-      progress: 90
+      progress: 90,
+      url: "https://tryhackme.com/path/outline/osint"
     },
     {
       title: "Red Team Operator",
       platform: "HackTheBox",
       level: "Beginner",
-      progress: 65
+      progress: 65,
+      url: "https://app.hackthebox.com/learning-paths/red-team"
     }
   ];
 
@@ -59,12 +66,23 @@ const Certifications: React.FC = () => {
           <h3 className="text-xl text-terminal-purple font-semibold mb-4">Certifications</h3>
           <div className="grid md:grid-cols-3 gap-4">
             {certifications.map((cert, index) => (
-              <div key={index} className="border border-terminal-green/50 rounded-md p-4 bg-terminal/50">
+              <a
+                key={index}
+                href={cert.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-terminal-green/50 rounded-md p-4 bg-terminal/50 hover:bg-terminal/70 transition-all duration-300 group"
+              >
                 <div className="text-3xl mb-2 text-center">{cert.logo}</div>
-                <h4 className="text-lg text-terminal-green font-semibold text-center">{cert.title}</h4>
+                <h4 className="text-lg text-terminal-green font-semibold text-center group-hover:text-terminal-amber transition-colors">
+                  {cert.title}
+                </h4>
                 <div className="text-sm text-center text-gray-400 mt-1">{cert.issuer}</div>
-                <div className="text-xs text-center text-terminal-amber mt-2">{cert.date}</div>
-              </div>
+                <div className="text-xs text-center text-terminal-amber mt-2 flex items-center justify-center gap-1">
+                  {cert.date}
+                  <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+              </a>
             ))}
           </div>
         </div>
@@ -73,9 +91,17 @@ const Certifications: React.FC = () => {
           <h3 className="text-xl text-terminal-purple font-semibold mb-4">Platform Badges & Achievements</h3>
           <div className="grid md:grid-cols-2 gap-4">
             {badges.map((badge, index) => (
-              <div key={index} className="border border-terminal-green/50 rounded-md p-4 bg-terminal/50">
+              <a
+                key={index}
+                href={badge.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-terminal-green/50 rounded-md p-4 bg-terminal/50 hover:bg-terminal/70 transition-all duration-300 group"
+              >
                 <div className="flex justify-between items-center mb-2">
-                  <h4 className="text-terminal-cyan font-medium">{badge.title}</h4>
+                  <h4 className="text-terminal-cyan font-medium group-hover:text-terminal-amber transition-colors">
+                    {badge.title}
+                  </h4>
                   <span className="text-xs bg-terminal-purple/20 px-2 py-1 rounded">
                     {badge.level}
                   </span>
@@ -87,10 +113,11 @@ const Certifications: React.FC = () => {
                     style={{ width: `${badge.progress}%` }}
                   ></div>
                 </div>
-                <div className="text-right text-xs text-terminal-amber mt-1">
+                <div className="text-right text-xs text-terminal-amber mt-1 flex items-center justify-end gap-1">
                   {badge.progress}% Complete
+                  <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>

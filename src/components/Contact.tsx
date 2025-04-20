@@ -36,37 +36,31 @@ const Contact: React.FC = () => {
     {
       name: 'GitHub',
       icon: <Github size={24} />,
-      url: 'https://github.com/yourusername',
+      url: 'https://github.com/Abhishek-kum73',
       color: 'hover:text-gray-400'
     },
     {
       name: 'LinkedIn',
       icon: <Linkedin size={24} />,
-      url: 'https://linkedin.com/in/yourusername',
+      url: 'https://linkedin.com/in/abhishekkum73',
       color: 'hover:text-blue-500'
     },
     {
       name: 'HackerRank',
       icon: <Code2 size={24} />,
-      url: 'https://hackerrank.com/yourusername',
+      url: 'https://hackerrank.com/abhishek73690',
       color: 'hover:text-green-500'
-    },
-    {
-      name: 'HackerEarth',
-      icon: <Terminal size={24} />,
-      url: 'https://hackerearth.com/@yourusername',
-      color: 'hover:text-purple-500'
     },
     {
       name: 'TryHackMe',
       icon: <Shield size={24} />,
-      url: 'https://tryhackme.com/p/yourusername',
+      url: 'https://tryhackme.com/p/abhishekkum',
       color: 'hover:text-red-500'
     },
     {
       name: 'HackTheBox',
       icon: <Bug size={24} />,
-      url: 'https://app.hackthebox.com/profile/yourusername',
+      url: 'https://app.hackthebox.com/profile/Abhishek736',
       color: 'hover:text-orange-500'
     }
   ];
