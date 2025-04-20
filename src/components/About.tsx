@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { FileText } from 'lucide-react';
 
 const About: React.FC = () => {
   return (
@@ -8,7 +8,17 @@ const About: React.FC = () => {
         <h2 className="section-header">About Me</h2>
         
         <div className="glow-card mb-8">
-          <h3 className="text-xl text-terminal-purple font-semibold mb-4">Background</h3>
+          <div className="flex justify-between items-start">
+            <h3 className="text-xl text-terminal-purple font-semibold mb-4">Background</h3>
+            <a 
+              href="/resume.pdf" 
+              download
+              className="flex items-center gap-2 text-terminal-green hover:text-terminal-amber transition-colors"
+            >
+              <FileText size={20} />
+              <span className="text-sm">Download Resume</span>
+            </a>
+          </div>
           <p className="mb-4">
             I'm a dedicated cybersecurity enthusiast currently pursuing my education in the field. My journey began with a fascination for how systems work, which quickly evolved into a passion for understanding how they can be broken—and more importantly, secured.
           </p>

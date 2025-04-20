@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { toast } from '../hooks/use-toast';
+import { Github, Linkedin, Code2, Shield, Terminal, Bug } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -32,6 +32,45 @@ const Contact: React.FC = () => {
     }, 1500);
   };
 
+  const socialLinks = [
+    {
+      name: 'GitHub',
+      icon: <Github size={24} />,
+      url: 'https://github.com/yourusername',
+      color: 'hover:text-gray-400'
+    },
+    {
+      name: 'LinkedIn',
+      icon: <Linkedin size={24} />,
+      url: 'https://linkedin.com/in/yourusername',
+      color: 'hover:text-blue-500'
+    },
+    {
+      name: 'HackerRank',
+      icon: <Code2 size={24} />,
+      url: 'https://hackerrank.com/yourusername',
+      color: 'hover:text-green-500'
+    },
+    {
+      name: 'HackerEarth',
+      icon: <Terminal size={24} />,
+      url: 'https://hackerearth.com/@yourusername',
+      color: 'hover:text-purple-500'
+    },
+    {
+      name: 'TryHackMe',
+      icon: <Shield size={24} />,
+      url: 'https://tryhackme.com/p/yourusername',
+      color: 'hover:text-red-500'
+    },
+    {
+      name: 'HackTheBox',
+      icon: <Bug size={24} />,
+      url: 'https://app.hackthebox.com/profile/yourusername',
+      color: 'hover:text-orange-500'
+    }
+  ];
+
   return (
     <section id="contact" className="py-16 px-4 bg-black/30">
       <div className="max-w-4xl mx-auto">
@@ -46,22 +85,26 @@ const Contact: React.FC = () => {
             </p>
             
             <div className="mt-6">
-              <div className="text-sm mb-2">Social Profiles:</div>
-              <div className="flex space-x-4">
-                <a href="#" className="text-terminal-green hover:text-terminal-amber transition-colors">
-                  GitHub
-                </a>
-                <a href="#" className="text-terminal-green hover:text-terminal-amber transition-colors">
-                  LinkedIn
-                </a>
-                <a href="#" className="text-terminal-green hover:text-terminal-amber transition-colors">
-                  Twitter
-                </a>
+              <div className="text-sm mb-4">Connect with me on:</div>
+              <div className="grid grid-cols-3 gap-4">
+                {socialLinks.map((link, index) => (
+                  <a
+                    key={index}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex flex-col items-center p-3 rounded-lg border border-terminal-green/30 bg-terminal/20 transition-all duration-300 ${link.color} hover:scale-105`}
+                  >
+                    {link.icon}
+                    <span className="text-xs mt-2 text-terminal-green">{link.name}</span>
+                  </a>
+                ))}
               </div>
             </div>
           </div>
           
           <div className="glow-card">
+            <h3 className="text-xl text-terminal-purple font-semibold mb-4">Send Message</h3>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label htmlFor="name" className="block text-sm text-terminal-amber mb-1">Name</label>

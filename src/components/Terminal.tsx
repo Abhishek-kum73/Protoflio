@@ -1,8 +1,12 @@
-
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, KeyboardEvent } from 'react';
 
 interface TerminalProps {
   onComplete?: () => void;
+}
+
+interface Command {
+  command: string;
+  output: string;
 }
 
 const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
@@ -10,7 +14,13 @@ const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [commandComplete, setCommandComplete] = useState(false);
+  const [isInteractive, setIsInteractive] = useState(false);
+  const [commandHistory, setCommandHistory] = useState<Command[]>([]);
+  const [currentInput, setCurrentInput] = useState<string>('');
+  const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const [inputHistory, setInputHistory] = useState<string[]>([]);
   const terminalRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Terminal commands and responses
   const commands = [
@@ -21,6 +31,79 @@ const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
     { command: './access --grant portfolio', response: 'ACCESS GRANTED. Welcome to my portfolio...' }
   ];
 
+  // Interactive commands
+  const interactiveCommands: { [key: string]: (args: string[]) => string } = {
+    help: () => `Available commands:
+  help - Show this help message
+  whoami - Display user information
+  clear - Clear terminal
+  ls - List files and directories
+  cat <filename> - Display file contents
+  projects - List my projects
+  skills - List my skills
+  contact - Show contact information
+  social - Display social media links
+  about - About me
+  echo <text> - Display text
+  date - Show current date and time`,
+
+    whoami: () => 'Cyber Security Learner | CTF Player | Bug Hunter',
+
+    clear: () => 'CLEAR',
+
+    ls: () => `web-pentest-framework.py
+network-scanner.sh
+vulnerability-database.sql
+ctf-writeups/
+iot-security-research/
+about.txt
+skills.txt`,
+
+    cat: (args) => {
+      const files: { [key: string]: string } = {
+        'about.txt': `Hi, I'm Abhishek Kumar. I love breaking into things legally and learning how they work.
+Currently exploring web security, IoT device hacking, and participating in CTFs.`,
+        'skills.txt': `Penetration Testing
+Network Security
+Web Application Security
+Python, Bash Scripting
+Vulnerability Assessment
+CTF Competition Experience`
+      };
+      
+      if (args.length === 0) return 'Usage: cat <filename>';
+      return files[args[0]] || `cat: ${args[0]}: No such file or directory`;
+    },
+
+    projects: () => `1. Web Penetration Testing Framework
+2. Network Security Scanner
+3. CTF Challenge Platform
+4. IoT Security Testing Lab`,
+
+    skills: () => `• Web Application Security
+• Network Penetration Testing
+• Python & Bash Scripting
+• Vulnerability Assessment
+• CTF Problem Solving
+• Linux System Administration`,
+
+    contact: () => `Email: your.email@example.com
+Website: https://yourwebsite.com`,
+
+    social: () => `GitHub: https://github.com/yourusername
+LinkedIn: https://linkedin.com/in/yourusername
+HackerRank: https://hackerrank.com/yourusername
+TryHackMe: https://tryhackme.com/p/yourusername
+HackTheBox: https://app.hackthebox.com/profile/yourusername`,
+
+    about: () => `I'm a dedicated cybersecurity enthusiast with a passion for ethical hacking and security research.
+Currently focusing on web security, IoT vulnerabilities, and CTF competitions.`,
+
+    echo: (args) => args.join(' '),
+
+    date: () => new Date().toLocaleString()
+  };
+
   // Sound effect (optional)
   const playKeySound = () => {
     // Implement sound if desired
@@ -30,11 +113,14 @@ const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
   };
 
   useEffect(() => {
+    if (isInteractive) return;
+
     if (currentCommandIndex >= commands.length) {
       // All commands complete
       if (onComplete) {
         setTimeout(() => {
           onComplete();
+          setIsInteractive(true);
         }, 1000);
       }
       return;
@@ -72,18 +158,73 @@ const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
       
       return () => clearTimeout(timer);
     }
-  }, [currentCommandIndex, currentCharIndex, commandComplete, commands, onComplete]);
+  }, [currentCommandIndex, currentCharIndex, commandComplete, commands, onComplete, isInteractive]);
+
+  const executeCommand = (input: string) => {
+    const [cmd, ...args] = input.trim().split(' ');
+    const command = cmd.toLowerCase();
+
+    let output = '';
+    if (command === '') {
+      output = '';
+    } else if (command === 'clear') {
+      setCommandHistory([]);
+      return;
+    } else if (interactiveCommands[command]) {
+      output = interactiveCommands[command](args);
+    } else {
+      output = `Command not found: ${command}. Type 'help' for available commands.`;
+    }
+
+    setCommandHistory(prev => [...prev, { command: input, output }]);
+    setInputHistory(prev => [...prev, input]);
+    setHistoryIndex(-1);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (!isInteractive) return;
+
+    if (e.key === 'Enter') {
+      executeCommand(currentInput);
+      setCurrentInput('');
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (historyIndex < inputHistory.length - 1) {
+        const newIndex = historyIndex + 1;
+        setHistoryIndex(newIndex);
+        setCurrentInput(inputHistory[inputHistory.length - 1 - newIndex]);
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        const newIndex = historyIndex - 1;
+        setHistoryIndex(newIndex);
+        setCurrentInput(inputHistory[inputHistory.length - 1 - newIndex]);
+      } else if (historyIndex === 0) {
+        setHistoryIndex(-1);
+        setCurrentInput('');
+      }
+    }
+  };
 
   useEffect(() => {
-    // Auto-scroll to the bottom of the terminal
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
-  }, [displayedText]);
+  }, [displayedText, commandHistory]);
+
+  useEffect(() => {
+    if (inputRef.current && isInteractive) {
+      inputRef.current.focus();
+    }
+  }, [isInteractive]);
 
   // Skip animation on click
   const handleSkip = () => {
-    if (onComplete) onComplete();
+    if (onComplete) {
+      onComplete();
+      setIsInteractive(true);
+    }
   };
 
   return (
@@ -103,8 +244,39 @@ const Terminal: React.FC<TerminalProps> = ({ onComplete }) => {
           className="terminal-body h-[70vh] overflow-y-auto whitespace-pre-line p-2"
         >
           <div className="terminal-content">
-            <span className="terminal-prompt">abhishek@portfolio:~$</span> {displayedText}
-            {currentCommandIndex < commands.length && !commandComplete && <span className="terminal-cursor"></span>}
+            {!isInteractive ? (
+              <>
+                <span className="terminal-prompt">abhishek@portfolio:~$</span> {displayedText}
+                {currentCommandIndex < commands.length && !commandComplete && <span className="terminal-cursor"></span>}
+              </>
+            ) : (
+              <>
+                <div className="mb-4 text-terminal-green">
+                  Welcome to my interactive terminal portfolio! Type 'help' to see available commands.
+                </div>
+                {commandHistory.map((entry, index) => (
+                  <div key={index} className="mb-2">
+                    <div className="flex">
+                      <span className="text-terminal-green">abhishek@portfolio:~$</span>
+                      <span className="text-terminal-amber ml-2">{entry.command}</span>
+                    </div>
+                    <div className="text-gray-300 ml-4">{entry.output}</div>
+                  </div>
+                ))}
+                <div className="flex items-center">
+                  <span className="text-terminal-green">abhishek@portfolio:~$</span>
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={currentInput}
+                    onChange={(e) => setCurrentInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    className="flex-1 ml-2 bg-transparent border-none outline-none text-terminal-amber"
+                    autoFocus
+                  />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
