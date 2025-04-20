@@ -1,12 +1,84 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState, useRef } from 'react';
+import Terminal from '@/components/Terminal';
+import Navbar from '@/components/Navbar';
+import About from '@/components/About';
+import Projects from '@/components/Projects';
+import Certifications from '@/components/Certifications';
+import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
 
 const Index = () => {
+  const [terminalComplete, setTerminalComplete] = useState(false);
+  
+  // Refs for section navigation
+  const terminalRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const certificationsRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+
+  const handleTerminalComplete = () => {
+    setTerminalComplete(true);
+  };
+
+  const handleNavClick = (section: string) => {
+    switch(section) {
+      case 'terminal':
+        terminalRef.current?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case 'about':
+        aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case 'projects':
+        projectsRef.current?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case 'certifications':
+        certificationsRef.current?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case 'contact':
+        contactRef.current?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-terminal">
+      {/* Only show navbar after terminal animation completes */}
+      {terminalComplete && <Navbar onNavClick={handleNavClick} />}
+      
+      {/* Terminal Section */}
+      <div 
+        ref={terminalRef}
+        className="min-h-screen flex items-center justify-center px-4 bg-terminal"
+      >
+        <Terminal onComplete={handleTerminalComplete} />
       </div>
+      
+      {/* Only show content sections after terminal animation completes */}
+      {terminalComplete && (
+        <>
+          <div ref={aboutRef}>
+            <About />
+          </div>
+          
+          <div ref={projectsRef}>
+            <Projects />
+          </div>
+          
+          <div ref={certificationsRef}>
+            <Certifications />
+          </div>
+          
+          <div ref={contactRef}>
+            <Contact />
+          </div>
+          
+          <Footer />
+        </>
+      )}
     </div>
   );
 };
