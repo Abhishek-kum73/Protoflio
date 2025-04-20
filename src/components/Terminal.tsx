@@ -150,7 +150,7 @@ Currently focusing on web security, IoT vulnerabilities, and CTF competitions.`,
     } else {
       // Prepare for next command
       const timer = setTimeout(() => {
-        setDisplayedText(prev => `${prev}\n\nabhishek@portfolio:~$ `);
+        setDisplayedText(prev => `${prev}\n\nroot@Abhi:~$ `);
         setCurrentCommandIndex(currentCommandIndex + 1);
         setCurrentCharIndex(0);
         setCommandComplete(false);
@@ -236,7 +236,7 @@ Currently focusing on web security, IoT vulnerabilities, and CTF competitions.`,
             <div className="terminal-control bg-yellow-500"></div>
             <div className="terminal-control bg-green-500"></div>
           </div>
-          <div className="terminal-title">abhishek@portfolio:~</div>
+          <div className="terminal-title">root@Abhi:~</div>
           <div className="text-xs cursor-pointer hover:text-terminal-amber" onClick={handleSkip}>Skip</div>
         </div>
         <div 
@@ -246,7 +246,7 @@ Currently focusing on web security, IoT vulnerabilities, and CTF competitions.`,
           <div className="terminal-content">
             {!isInteractive ? (
               <>
-                <span className="terminal-prompt">abhishek@portfolio:~$</span> {displayedText}
+                <span className="terminal-prompt">root@Abhi:~$</span> {displayedText}
                 {currentCommandIndex < commands.length && !commandComplete && <span className="terminal-cursor"></span>}
               </>
             ) : (
@@ -257,14 +257,14 @@ Currently focusing on web security, IoT vulnerabilities, and CTF competitions.`,
                 {commandHistory.map((entry, index) => (
                   <div key={index} className="mb-2">
                     <div className="flex">
-                      <span className="text-terminal-green">abhishek@portfolio:~$</span>
+                      <span className="text-terminal-green">root@Abhi:~$</span>
                       <span className="text-terminal-amber ml-2">{entry.command}</span>
                     </div>
                     <div className="text-gray-300 ml-4">{entry.output}</div>
                   </div>
                 ))}
                 <div className="flex items-center">
-                  <span className="text-terminal-green">abhishek@portfolio:~$</span>
+                  <span className="text-terminal-green">root@Abhi:~$</span>
                   <input
                     ref={inputRef}
                     type="text"

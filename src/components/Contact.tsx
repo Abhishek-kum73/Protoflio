@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from '../hooks/use-toast';
 import { Github, Linkedin, Code2, Shield, Terminal, Bug } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,11 @@ const Contact: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init('NE_wNaHhlEh8GPw7P');
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -17,19 +23,49 @@ const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+
+    try {
+      const serviceId = 'service_v2ds365';
+      const templateId = 'template_0w1489k';
+
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        to_name: 'Abhishek',
+        message: formData.message,
+        reply_to: formData.email
+      };
+
+      console.log('Sending email with params:', templateParams);
+
+      const response = await emailjs.send(serviceId, templateId, templateParams);
+      console.log('Email sent successfully:', response);
+
       toast({
-        title: "Message Sent",
-        description: "Thanks for reaching out. I'll get back to you soon!",
+        title: "Message Sent Successfully",
+        description: "Thanks for reaching out! I'll get back to you soon.",
       });
+      
       setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      // Log the specific error details
+      if (error instanceof Error) {
+        console.error('Error message:', error.message);
+        console.error('Error stack:', error.stack);
+      }
+      
+      toast({
+        title: "Error",
+        description: "There was an error sending your message. Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   const socialLinks = [
@@ -72,36 +108,38 @@ const Contact: React.FC = () => {
         
         <div className="grid md:grid-cols-2 gap-8">
           <div className="glow-card">
-            <h3 className="text-xl text-terminal-purple font-semibold mb-4">Get In Touch</h3>
+            <h3 className="text-xl text-terminal-purple font-semibold mb-4">Connect With Me</h3>
             <p className="mb-4">
               Interested in collaborating on cybersecurity projects or have questions about my work? 
               Feel free to reach out through this form or connect with me on social platforms.
             </p>
+            <p className="mb-4">
+              You can also find me on these platforms:
+            </p>
             
-            <div className="mt-6">
-              <div className="text-sm mb-4">Connect with me on:</div>
-              <div className="grid grid-cols-3 gap-4">
-                {socialLinks.map((link, index) => (
-                  <a
-                    key={index}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex flex-col items-center p-3 rounded-lg border border-terminal-green/30 bg-terminal/20 transition-all duration-300 ${link.color} hover:scale-105`}
-                  >
-                    {link.icon}
-                    <span className="text-xs mt-2 text-terminal-green">{link.name}</span>
-                  </a>
-                ))}
-              </div>
+            <div className="grid grid-cols-3 gap-4">
+              {socialLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex flex-col items-center p-3 rounded-lg border border-terminal-green/30 bg-terminal/20 transition-all duration-300 ${link.color} hover:scale-105`}
+                >
+                  {link.icon}
+                  <span className="text-xs mt-2 text-terminal-green">{link.name}</span>
+                </a>
+              ))}
             </div>
           </div>
-          
+
           <div className="glow-card">
-            <h3 className="text-xl text-terminal-purple font-semibold mb-4">Send Message</h3>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label htmlFor="name" className="block text-sm text-terminal-amber mb-1">Name</label>
+            <h3 className="text-xl text-terminal-purple font-semibold mb-4">Get In Touch</h3>
+           
+          
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label htmlFor="name" className="block text-sm text-terminal-green mb-1">Name</label>
                 <input
                   type="text"
                   id="name"
@@ -109,12 +147,12 @@ const Contact: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full bg-black border border-terminal-green/50 rounded-md p-2 text-terminal-green focus:border-terminal-cyan focus:ring-1 focus:ring-terminal-cyan outline-none"
+                  className="w-full px-3 py-2 bg-terminal/50 border border-terminal-green/50 rounded-md text-white focus:outline-none focus:border-terminal-amber"
                 />
               </div>
               
-              <div className="mb-4">
-                <label htmlFor="email" className="block text-sm text-terminal-amber mb-1">Email</label>
+              <div>
+                <label htmlFor="email" className="block text-sm text-terminal-green mb-1">Email</label>
                 <input
                   type="email"
                   id="email"
@@ -122,12 +160,12 @@ const Contact: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full bg-black border border-terminal-green/50 rounded-md p-2 text-terminal-green focus:border-terminal-cyan focus:ring-1 focus:ring-terminal-cyan outline-none"
+                  className="w-full px-3 py-2 bg-terminal/50 border border-terminal-green/50 rounded-md text-white focus:outline-none focus:border-terminal-amber"
                 />
               </div>
               
-              <div className="mb-4">
-                <label htmlFor="message" className="block text-sm text-terminal-amber mb-1">Message</label>
+              <div>
+                <label htmlFor="message" className="block text-sm text-terminal-green mb-1">Message</label>
                 <textarea
                   id="message"
                   name="message"
@@ -135,14 +173,14 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="w-full bg-black border border-terminal-green/50 rounded-md p-2 text-terminal-green focus:border-terminal-cyan focus:ring-1 focus:ring-terminal-cyan outline-none"
+                  className="w-full px-3 py-2 bg-terminal/50 border border-terminal-green/50 rounded-md text-white focus:outline-none focus:border-terminal-amber"
                 ></textarea>
               </div>
               
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full bg-terminal-green text-black font-bold py-2 px-4 rounded-md hover:bg-terminal-amber transition-colors ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className="w-full py-2 px-4 bg-terminal-green/20 border border-terminal-green text-terminal-green rounded-md hover:bg-terminal-green/30 hover:text-terminal-amber transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
