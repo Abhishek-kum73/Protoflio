@@ -1,7 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FileText } from 'lucide-react';
 
 const About: React.FC = () => {
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      const response = await fetch('/resume.pdf');
+      if (!response.ok) throw new Error('Resume not found');
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Abhishek_Kumar_Resume.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('Error downloading resume:', error);
+      // You could add a toast notification here for errors
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
   return (
     <section id="about" className="py-16 px-4">
       <div className="max-w-4xl mx-auto">
@@ -10,14 +35,19 @@ const About: React.FC = () => {
         <div className="glow-card mb-8">
           <div className="flex justify-between items-start">
             <h3 className="text-xl text-terminal-purple font-semibold mb-4">Background</h3>
-            <a 
-              href="/resume.pdf" 
-              download
-              className="flex items-center gap-2 text-terminal-green hover:text-terminal-amber transition-colors"
+            <button 
+              onClick={handleDownload}
+              disabled={isDownloading}
+              className="flex items-center gap-2 text-terminal-green hover:text-terminal-amber transition-colors disabled:opacity-50 disabled:cursor-not-allowed group relative"
             >
-              <FileText size={20} />
-              <span className="text-sm">Download Resume</span>
-            </a>
+              <FileText size={20} className={isDownloading ? 'animate-pulse' : ''} />
+              <span className="text-sm">{isDownloading ? 'Downloading...' : 'Download Resume'}</span>
+              
+              {/* Tooltip */}
+              <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-terminal-green/90 text-black px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Click to download my resume
+              </span>
+            </button>
           </div>
           <p className="mb-4">
             I'm a dedicated cybersecurity enthusiast currently pursuing my education in the field. My journey began with a fascination for how systems work, which quickly evolved into a passion for understanding how they can be broken—and more importantly, secured.
