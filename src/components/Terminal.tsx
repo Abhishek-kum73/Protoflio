@@ -87,14 +87,14 @@ CTF Competition Experience`
 • CTF Problem Solving
 • Linux System Administration`,
 
-    contact: () => `Email: your.email@example.com
-Website: https://yourwebsite.com`,
+    contact: () => `Email: abhishekkum.6973@gmail.com
+Website: https://rootabhi.me`,
 
-    social: () => `GitHub: https://github.com/yourusername
-LinkedIn: https://linkedin.com/in/yourusername
-HackerRank: https://hackerrank.com/yourusername
-TryHackMe: https://tryhackme.com/p/yourusername
-HackTheBox: https://app.hackthebox.com/profile/yourusername`,
+    social: () => `GitHub: https://github.com/Abhishek-kum73
+LinkedIn: https://linkedin.com/in/abhishekkum73
+HackerRank: https://hackerrank.com/abhishek73690
+TryHackMe: https://tryhackme.com/p/abhishekkum
+HackTheBox: https://app.hackthebox.com/profile/Abhishek736`,
 
     about: () => `I'm a dedicated cybersecurity enthusiast with a passion for ethical hacking and security research.
 Currently focusing on web security, IoT vulnerabilities, and CTF competitions.`,
