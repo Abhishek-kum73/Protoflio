@@ -4,6 +4,18 @@ import { ExternalLink } from 'lucide-react';
 const Certifications: React.FC = () => {
   const certifications = [
     {
+      title: "HackFinity Battle CTF Challenge",
+      issuer: "HackFinity",
+      date: "March 2025",
+      image: "/images/abhi.png",
+      stats: {
+        rank: 1762,
+        points: 90,
+        tasks: 12
+      },
+      url: "#"
+    },
+    {
       title: "Certified Ethical Hacker (CEH)",
       issuer: "EC-Council",
       date: "In Progress",
@@ -77,9 +89,53 @@ const Certifications: React.FC = () => {
         <h2 className="section-header">Certifications & Badges</h2>
         
         <div className="glow-card mb-8">
-          <h3 className="text-xl text-terminal-purple font-semibold mb-4">Certifications</h3>
+          <h3 className="text-xl text-terminal-purple font-semibold mb-4">Featured Achievement</h3>
+          <div className="grid md:grid-cols-2 gap-6 items-center">
+            <div className="relative group">
+              <img 
+                src={certifications[0].image}
+                alt="HackFinity Battle Certificate" 
+                className="w-full rounded-lg border-2 border-terminal-green/30 transition-all duration-300 group-hover:border-terminal-green/60"
+                onError={(e) => {
+                  e.currentTarget.onerror = null; // Prevent infinite loop
+                  console.error('Image failed to load');
+                  // Optionally set a fallback image
+                  // e.currentTarget.src = '/images/fallback.png';
+                }}
+              />
+            </div>
+            <div>
+              <h4 className="text-xl text-terminal-green font-semibold mb-2">{certifications[0].title}</h4>
+              <p className="text-gray-300 mb-4">
+                Successfully completed the HackFinity Battle CTF Challenge, demonstrating practical skills in cybersecurity, 
+                problem-solving, and ethical hacking through a series of complex challenges.
+              </p>
+              <div className="text-sm text-terminal-amber mb-4">Completed on: {certifications[0].date}</div>
+              
+              <div className="bg-black/80 backdrop-blur-sm rounded p-4 border border-terminal-green/30">
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="text-center">
+                    <div className="text-terminal-amber text-sm mb-1">Scoreboard Rank</div>
+                    <div className="text-terminal-green font-mono text-xl">{certifications[0].stats.rank}</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-terminal-amber text-sm mb-1">Points Earned</div>
+                    <div className="text-terminal-green font-mono text-xl">{certifications[0].stats.points}</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-terminal-amber text-sm mb-1">Tasks Done</div>
+                    <div className="text-terminal-green font-mono text-xl">{certifications[0].stats.tasks}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="glow-card mb-8">
+          <h3 className="text-xl text-terminal-purple font-semibold mb-4">Other Certifications</h3>
           <div className="grid md:grid-cols-3 gap-4">
-            {certifications.map((cert, index) => (
+            {certifications.slice(1).map((cert, index) => (
               <a
                 key={index}
                 href={cert.url}
