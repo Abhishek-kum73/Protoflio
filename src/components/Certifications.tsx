@@ -28,32 +28,46 @@ const Certifications: React.FC = () => {
 
   const badges = [
     {
+      title: "Pre Security",
+      platform: "TryHackMe",
+      level: "Easy",
+      progress: 65,
+      url: "https://tryhackme.com/paths"
+    },
+    {
       title: "Web Fundamentals",
       platform: "TryHackMe",
-      level: "Advanced",
-      progress: 100,
-      url: "https://tryhackme.com/path/outline/web"
+      level: "Easy",
+      progress: 26,
+      url: "https://tryhackme.com/paths"
     },
     {
-      title: "Network Security",
-      platform: "HackTheBox",
-      level: "Intermediate",
-      progress: 80,
-      url: "https://app.hackthebox.com/learning-paths/network-security"
+      title: "Comptia Pentest+",
+      platform: "TryHackMe",
+      level: "Easy",
+      progress: 35,
+      url: "https://tryhackme.com/paths"
     },
     {
-      title: "OSINT Specialist",
+      title: "DevSecOps",
       platform: "TryHackMe",
       level: "Intermediate",
-      progress: 90,
-      url: "https://tryhackme.com/path/outline/osint"
+      progress: 30,
+      url: "https://tryhackme.com/paths"
     },
     {
-      title: "Red Team Operator",
+      title: "Information Security Fundamentals",
       platform: "HackTheBox",
-      level: "Beginner",
-      progress: 65,
-      url: "https://app.hackthebox.com/learning-paths/red-team"
+      level: "Intermediate",
+      progress: 61,
+      url: "https://academy.hackthebox.com/paths"
+    },
+    {
+      title: "Operating System Fundamentals",
+      platform: "HackTheBox",
+      level: "Intermediate",
+      progress: 58,
+      url: "https://academy.hackthebox.com/paths"
     }
   ];
 

@@ -27,65 +27,128 @@ const About: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="glow-card">
-            <h3 className="text-xl text-terminal-purple font-semibold mb-4">Skills</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center">
-                <span className="text-terminal-amber mr-2">▶</span> 
-                <span>Web Application Security</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-terminal-amber mr-2">▶</span> 
-                <span>Network Penetration Testing</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-terminal-amber mr-2">▶</span> 
-                <span>Python & Bash Scripting</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-terminal-amber mr-2">▶</span> 
-                <span>Vulnerability Assessment</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-terminal-amber mr-2">▶</span> 
-                <span>CTF Problem Solving</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-terminal-amber mr-2">▶</span> 
-                <span>Linux System Administration</span>
-              </li>
-            </ul>
-          </div>
+        <div className="glow-card">
+          <h3 className="text-xl text-terminal-purple font-semibold mb-4">Technical Skills & Expertise</h3>
           
-          <div className="glow-card">
-            <h3 className="text-xl text-terminal-purple font-semibold mb-4">Interests</h3>
-            <ul className="space-y-2">
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Programming Languages */}
+            <div>
+              <h4 className="text-terminal-amber font-medium mb-3">Programming Languages</h4>
+              <ul className="space-y-2">
               <li className="flex items-center">
-                <span className="text-terminal-amber mr-2">▶</span> 
-                <span>IoT Security Research</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-terminal-amber mr-2">▶</span> 
-                <span>Bug Bounty Hunting</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-terminal-amber mr-2">▶</span> 
-                <span>Red Team Operations</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-terminal-amber mr-2">▶</span> 
-                <span>Reverse Engineering</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-terminal-amber mr-2">▶</span> 
-                <span>Cryptography</span>
-              </li>
-              <li className="flex items-center">
-                <span className="text-terminal-amber mr-2">▶</span> 
-                <span>Open Source Security Tools</span>
-              </li>
-            </ul>
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>C/C++</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Python</span>
+                </li>
+                
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Java</span>
+                </li>
+
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>JavaScript</span>
+                </li>
+                                 
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>CSS</span>
+                </li>
+
+
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Bash Scripting</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Technologies & Frameworks */}
+            <div>
+              <h4 className="text-terminal-amber font-medium mb-3">Technologies/Frameworks</h4>
+              <ul className="space-y-2">
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>OWASP top 10 Vulnerabilities</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Kali Linux</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Black arch Linux</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Linux PrivEsc</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Pentesting principals</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Git, Github</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Ubuntu</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Hash Cracker </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Security Skills */}
+            <div>
+              <h4 className="text-terminal-amber font-medium mb-3">Skills</h4>
+              <ul className="space-y-2">
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Data Structures and Algorithms</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Problem Solving</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Nmap</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Cryptography</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Wireshark</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Burp Suite</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>OSI Model</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Metasploit</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-terminal-amber mr-2">▶</span> 
+                  <span>Recong-ng/Maltego</span>
+                </li>
+
+              </ul>
+            </div>
           </div>
         </div>
       </div>
