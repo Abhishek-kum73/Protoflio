@@ -11,9 +11,9 @@ const Contact: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Initialize EmailJS
+  // Initialize EmailJS with your public key
   useEffect(() => {
-    emailjs.init('NE_wNaHhlEh8GPw7P');
+    emailjs.init('8ajEQsnF8y2HsMzhF');
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -28,9 +28,6 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const serviceId = 'service_v2ds365';
-      const templateId = 'template_0w1489k';
-
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
@@ -39,24 +36,23 @@ const Contact: React.FC = () => {
         reply_to: formData.email
       };
 
-      console.log('Sending email with params:', templateParams);
+      const response = await emailjs.send(
+        'service_talvoje', // Your service ID
+        'template_kcp58la', // Your template ID
+        templateParams
+      );
 
-      const response = await emailjs.send(serviceId, templateId, templateParams);
-      console.log('Email sent successfully:', response);
-
-      toast({
-        title: "Message Sent Successfully",
-        description: "Thanks for reaching out! I'll get back to you soon.",
-      });
-      
-      setFormData({ name: '', email: '', message: '' });
+      if (response.status === 200) {
+        toast({
+          title: "Message Sent Successfully",
+          description: "Thanks for reaching out! I'll get back to you soon.",
+        });
+        
+        // Reset form after successful submission
+        setFormData({ name: '', email: '', message: '' });
+      }
     } catch (error) {
       console.error('Error sending email:', error);
-      // Log the specific error details
-      if (error instanceof Error) {
-        console.error('Error message:', error.message);
-        console.error('Error stack:', error.stack);
-      }
       
       toast({
         title: "Error",
@@ -135,8 +131,6 @@ const Contact: React.FC = () => {
 
           <div className="glow-card">
             <h3 className="text-xl text-terminal-purple font-semibold mb-4">Get In Touch</h3>
-           
-          
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm text-terminal-green mb-1">Name</label>
@@ -148,6 +142,7 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-3 py-2 bg-terminal/50 border border-terminal-green/50 rounded-md text-white focus:outline-none focus:border-terminal-amber"
+                  placeholder="Your name"
                 />
               </div>
               
@@ -161,6 +156,7 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-3 py-2 bg-terminal/50 border border-terminal-green/50 rounded-md text-white focus:outline-none focus:border-terminal-amber"
+                  placeholder="your.email@example.com"
                 />
               </div>
               
@@ -174,6 +170,7 @@ const Contact: React.FC = () => {
                   required
                   rows={4}
                   className="w-full px-3 py-2 bg-terminal/50 border border-terminal-green/50 rounded-md text-white focus:outline-none focus:border-terminal-amber"
+                  placeholder="Your message here..."
                 ></textarea>
               </div>
               
