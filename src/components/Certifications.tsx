@@ -134,7 +134,7 @@ const Certifications: React.FC = () => {
         <h2 className="section-header">Certifications & Badges</h2>
         
         <div className="glow-card mb-8">
-          <h3 className="text-xl text-terminal-purple font-semibold mb-4">Featured Achievement</h3>
+          <h3 className="text-xl text-terminal-purple font-semibold mb-4">Achievement</h3>
           <div className="grid md:grid-cols-2 gap-6 items-center">
             <div className="relative group">
               <img 
@@ -172,7 +172,7 @@ const Certifications: React.FC = () => {
         </div>
         
         <div className="glow-card mb-8">
-          <h3 className="text-xl text-terminal-purple font-semibold mb-4">Other Certifications</h3>
+          <h3 className="text-xl text-terminal-purple font-semibold mb-4">Certifications</h3>
           <div className="grid md:grid-cols-3 gap-4">
             {certifications.slice(1).map((cert, index) => (
               <a
