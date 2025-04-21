@@ -7,7 +7,7 @@ const Certifications: React.FC = () => {
       title: "HackFinity Battle CTF Challenge",
       issuer: "HackFinity",
       date: "March 2025",
-      image: "/images/abhi.png",
+      image: "/images/abhi1.png",
       stats: {
         rank: 1762,
         points: 90,
@@ -16,26 +16,71 @@ const Certifications: React.FC = () => {
       url: "#"
     },
     {
-      title: "Certified Ethical Hacker (CEH)",
-      issuer: "EC-Council",
-      date: "In Progress",
-      logo: "🛡️",
-      url: "https://www.eccouncil.org/certified-ethical-hacker/"
-    },
-    {
-      title: "CompTIA Security+",
-      issuer: "CompTIA",
-      date: "In Progress",
-      logo: "🔒",
-      url: "https://www.comptia.org/certifications/security"
-    },
-    {
-      title: "TryHackMe SOC Level 1 Path",
+      title: "Advent of Cyber 2024",
       issuer: "TryHackMe",
-      date: "December 2024",
-      logo: "🔍",
-      url: "https://tryhackme.com/path/outline/soc1"
+      date: "March 2025",
+      image: "/images/abhi9.png",
+      url: "https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-NLLPZPTO3D.pdf"
+    },
+    {
+      title: "Advent of Cyber 2023",
+      issuer: "TryHackMe",
+      date: "January 2025",
+      image: "/images/abhi2.png",
+      url: "https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-KNKMGWX85B.pdf"
+    },
+    {
+      title: "SQL Injection Attacks",
+      issuer: "Eccouncil",
+      date: "January 2025",
+      image: "/images/abhi7.png",
+      url: "https://codered.eccouncil.org/certificate/6c19ae0b-4390-4abe-86b7-1809f753c6c8?logged=true"
+    },
+    {
+      title: "Ethical Hacking Essentials (EHE)",
+      issuer: "Coursera",
+      date: "October 2024",
+      image: "/images/abhi12.png",
+      url: "https://www.coursera.org/account/accomplishments/certificate/13XR1IRWBTWO"
+    },
+    {
+      title: "Digital Forensics Essentials (DFE)",
+      issuer: "Coursera",
+      date: "September 2024",
+      image: "/images/abhi11.png",
+      url: "https://www.coursera.org/account/accomplishments/certificate/NWZ8XMVG92XE"
+    },
+    {
+      title: "The Bits and Bytes of Computer Networking",
+      issuer: "Coursera",
+      date: "January 2024",
+      image: "/images/abhi13.png",
+      url: "https://www.coursera.org/account/accomplishments/certificate/N24AXWNHT4F8"
+    },
+    {
+      title: "Programming in C++",
+      issuer: "Coursera",
+      date: "November 2023",
+      image: "/images/abhi4.png",
+      url: "https://www.coursera.org/account/accomplishments/specialization/certificate/9X486DA8XEG5"
+    },
+
+    {
+      title: "Algorithms",
+      issuer: "Coursera",
+      date: "November 2023",
+      image: "/images/abhi5.png",
+      url: "https://www.coursera.org/account/accomplishments/specialization/certificate/9XAFJSHZV7B4"
+    },
+
+    {
+      title: "Introduction to Hardware and Operating Systems",
+      issuer: "Coursera",
+      date: "October 2023",
+      image: "/images/abhi10.png",
+      url: "https://www.coursera.org/account/accomplishments/certificate/2M7BBP3TGG6B"
     }
+
   ];
 
   const badges = [
@@ -96,12 +141,6 @@ const Certifications: React.FC = () => {
                 src={certifications[0].image}
                 alt="HackFinity Battle Certificate" 
                 className="w-full rounded-lg border-2 border-terminal-green/30 transition-all duration-300 group-hover:border-terminal-green/60"
-                onError={(e) => {
-                  e.currentTarget.onerror = null; // Prevent infinite loop
-                  console.error('Image failed to load');
-                  // Optionally set a fallback image
-                  // e.currentTarget.src = '/images/fallback.png';
-                }}
               />
             </div>
             <div>
@@ -143,7 +182,13 @@ const Certifications: React.FC = () => {
                 rel="noopener noreferrer"
                 className="border border-terminal-green/50 rounded-md p-4 bg-terminal/50 hover:bg-terminal/70 transition-all duration-300 group"
               >
-                <div className="text-3xl mb-2 text-center">{cert.logo}</div>
+                <div className="mb-4 h-40 overflow-hidden rounded-lg border border-terminal-green/30">
+                  <img 
+                    src={cert.image}
+                    alt={`${cert.title} Certificate`}
+                    className="w-full h-full object-cover object-center transform transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
                 <h4 className="text-lg text-terminal-green font-semibold text-center group-hover:text-terminal-amber transition-colors">
                   {cert.title}
                 </h4>
@@ -181,7 +226,7 @@ const Certifications: React.FC = () => {
                   <div 
                     className="bg-terminal-green h-2 rounded-full animate-pulse-glow"
                     style={{ width: `${badge.progress}%` }}
-                  ></div>
+                  />
                 </div>
                 <div className="text-right text-xs text-terminal-amber mt-1 flex items-center justify-end gap-1">
                   {badge.progress}% Complete
