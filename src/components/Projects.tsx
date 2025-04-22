@@ -4,32 +4,32 @@ import { Github } from 'lucide-react';
 const Projects: React.FC = () => {
   const projects = [
     {
-      title: "Web Penetration Testing Framework",
-      description: "A custom Python-based framework for automated web application vulnerability scanning, with modules for XSS, SQL injection, and CSRF testing.",
-      technologies: ["Python", "BeautifulSoup", "Requests", "SQLite"],
-      status: "In Progress",
-      githubUrl: "https://github.com/Abhishek-kum73/web-pentest-framework"
+      title: "Encryption and Decryption Tool",
+      description: "An Encryption and Decryption Tool is a program that securely converts plain text into ciphertext using a cryptographic algorithm, and then reverses it back to readable text using a key. It helps protect sensitive data during storage or transmission.",
+      technologies: ["HTML", "CSS", "JavaScript", "Python","Requests"],
+      status: "Completed",
+      githubUrl: "https://github.com/Abhishek-kum73/CoderDecoder"
     },
     {
       title: "Network Security Scanner",
-      description: "A Bash tool that combines multiple scanning techniques to provide comprehensive network analysis and vulnerability reporting.",
-      technologies: ["Bash", "Nmap", "Wireshark", "Linux"],
+      description: "A Network Security Scanner is a tool that scans devices on a network to identify open ports, services, and potential vulnerabilities. It helps assess the security posture of systems and detect misconfigurations or threats.",
+      technologies: ["Bash", "Nmap", "Wireshark", "Linux","Python"],
       status: "Completed",
-      githubUrl: "https://github.com/Abhishek-kum73/network-security-scanner"
+      githubUrl: "https://github.com/Abhishek-kum73/Network_Scan/tree/main"
     },
     {
-      title: "CTF Challenge Platform",
-      description: "A self-hosted platform for creating and solving Capture The Flag challenges, with authentication, scoring, and hints system.",
-      technologies: ["JavaScript", "Node.js", "Docker", "MongoDB"],
+      title: "Password Strength Checker",
+      description: "A Password Strength Checker is a tool that evaluates the security of a password based on length, complexity, and predictability. It helps users create strong, hard-to-crack passwords to enhance account security.",
+      technologies: ["Python", "Tkinter", "tkinter-password-strength"],
       status: "Completed",
-      githubUrl: "https://github.com/Abhishek-kum73/ctf-platform"
+      githubUrl: "https://github.com/Abhishek-kum73/PasswordStrengthChecker"
     },
     {
-      title: "IoT Security Testing Lab",
-      description: "A virtual environment for testing IoT device security, including firmware analysis tools and network simulation capabilities.",
-      technologies: ["Virtual Machines", "Python", "C", "Firmware Analysis"],
+      title: "Browser Extension Security Analyzer",
+      description: "A Browser Extension Security Analyzer is a tool that scans browser extensions for security risks such as excessive permissions, use of dangerous APIs, or suspicious code patterns.",
+      technologies: ["Python","Rust","Node.js","React","Typescript","Tailwind CSS"],
       status: "In Progress",
-      githubUrl: "https://github.com/Abhishek-kum73/iot-security-lab"
+      githubUrl: "https://github.com/Abhishek-kum73/PasswordStrengthChecker"
     }
   ];
 
