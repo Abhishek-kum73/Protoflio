@@ -182,11 +182,11 @@ const Certifications: React.FC = () => {
                 rel="noopener noreferrer"
                 className="border border-terminal-green/50 rounded-md p-4 bg-terminal/50 hover:bg-terminal/70 transition-all duration-300 group"
               >
-                <div className="mb-4 h-40 overflow-hidden rounded-lg border border-terminal-green/30">
+                <div className="mb-4 aspect-[4/3] overflow-hidden rounded-lg border border-terminal-green/30">
                   <img 
                     src={cert.image}
                     alt={`${cert.title} Certificate`}
-                    className="w-full h-full object-cover object-center transform transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-full object-contain transform transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
                 <h4 className="text-lg text-terminal-green font-semibold text-center group-hover:text-terminal-amber transition-colors">
