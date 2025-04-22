@@ -75,10 +75,10 @@ CTF Competition Experience`
       return files[args[0]] || `cat: ${args[0]}: No such file or directory`;
     },
 
-    projects: () => `1. Web Penetration Testing Framework
+    projects: () => `1. Encryption & Decryption Tool
 2. Network Security Scanner
-3. CTF Challenge Platform
-4. IoT Security Testing Lab`,
+3. Password Strength Checker
+4. Browser Extension Security Analyzer`,
 
     skills: () => `• Web Application Security
 • Network Penetration Testing
