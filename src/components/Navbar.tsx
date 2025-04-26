@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
@@ -41,6 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick }) => {
           {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-4">
             <button onClick={() => handleNavClick('about')} className="nav-link">About</button>
+            <button onClick={() => handleNavClick('education')} className="nav-link">Education</button>
             <button onClick={() => handleNavClick('projects')} className="nav-link">Projects</button>
             <button onClick={() => handleNavClick('certifications')} className="nav-link">Certifications</button>
             <button onClick={() => handleNavClick('contact')} className="nav-link">Contact</button>
@@ -54,6 +54,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick }) => {
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <button onClick={() => handleNavClick('about')} className="block px-3 py-2 w-full text-left text-terminal-green hover:text-terminal-amber">
               About
+            </button>
+            <button onClick={() => handleNavClick('education')} className="block px-3 py-2 w-full text-left text-terminal-green hover:text-terminal-amber">
+              Education
             </button>
             <button onClick={() => handleNavClick('projects')} className="block px-3 py-2 w-full text-left text-terminal-green hover:text-terminal-amber">
               Projects

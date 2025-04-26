@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import Terminal from '@/components/Terminal';
 import Navbar from '@/components/Navbar';
@@ -7,6 +6,7 @@ import Projects from '@/components/Projects';
 import Certifications from '@/components/Certifications';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import EducationSection from '../components/EducationSection';
 
 const Index = () => {
   const [terminalComplete, setTerminalComplete] = useState(false);
@@ -14,6 +14,7 @@ const Index = () => {
   // Refs for section navigation
   const terminalRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
+  const educationRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const certificationsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
@@ -29,6 +30,9 @@ const Index = () => {
         break;
       case 'about':
         aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case 'education':
+        educationRef.current?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'projects':
         projectsRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -63,19 +67,18 @@ const Index = () => {
           <div ref={aboutRef}>
             <About />
           </div>
-          
+          <div ref={educationRef}>
+            <EducationSection />
+          </div>
           <div ref={projectsRef}>
             <Projects />
           </div>
-          
           <div ref={certificationsRef}>
             <Certifications />
           </div>
-          
           <div ref={contactRef}>
             <Contact />
           </div>
-          
           <Footer />
         </>
       )}
