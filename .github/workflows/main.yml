@@ -16,8 +16,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-        - name: List build output
-           run: ls -R build/
+
 
       # Step 2: Install Node.js (for React)
       - name: Set up Node.js
@@ -45,4 +44,4 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
-          SOURCE_DIR: ./frontend/build
+          #SOURCE_DIR: ./frontend/build
