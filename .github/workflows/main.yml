@@ -25,12 +25,12 @@ jobs:
       # Step 3: Install Dependencies
       - name: Install Dependencies
         run: npm install
-        working-directory: ./frontend
+        #working-directory: ./frontend
 
       # Step 4: Build React App
       - name: Build React App
         run: npm run build
-        working-directory: ./frontend
+        #working-directory: ./frontend
 
       # Step 5: Deploy to S3
       - name: Deploy to S3
